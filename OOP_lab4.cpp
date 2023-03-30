@@ -7,11 +7,13 @@
 #include "GasMode.h"
 #include "GasDetector.h"
 #include "GasAmiak.h"
+#include "GasOzon.h"
 
 int main()
 {
     setlocale(LC_ALL, "Russian");
     GasAmiak* am = new GasAmiak();
+    GasOzon* oz = new GasOzon();
     GasDetector gs1(*am);
     gs1.viewMode();
     gs1.takeData();
@@ -20,4 +22,6 @@ int main()
     cout << gs1.sendData();
     gs1.concentInfo();
 
+    GasDetector gs2(*oz);
+    gs2.viewMode();
 }

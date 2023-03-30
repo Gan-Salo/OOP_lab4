@@ -144,6 +144,7 @@
     <ClCompile Include="GasAmiak.cpp" />
     <ClCompile Include="GasDetector.cpp" />
     <ClCompile Include="GasMode.cpp" />
+    <ClCompile Include="GasOzon.cpp" />
     <ClCompile Include="HumidDetector.cpp" />
     <ClCompile Include="OOP_lab4.cpp" />
     <ClCompile Include="Sensor.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="GasAmiak.h" />
     <ClInclude Include="GasDetector.h" />
     <ClInclude Include="GasMode.h" />
+    <ClInclude Include="GasOzon.h" />
     <ClInclude Include="HumidDetector.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="TemperDetector.h" />
