@@ -7,7 +7,7 @@
 using namespace std;
 
 class GasDetector: public Sensor {
-	GasMode* chosedmode;
+	
 public:
 		GasDetector(GasMode& mode);
 		float sendData();
@@ -15,6 +15,7 @@ public:
 		void viewMode();
 		void concentInfo();
 private:
+	GasMode* chosedmode;
 	//string mode;
 	float concentration;
 };
