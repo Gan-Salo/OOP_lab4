@@ -148,8 +148,11 @@
     <ClCompile Include="HumidDetector.cpp" />
     <ClCompile Include="Measurer.cpp" />
     <ClCompile Include="OOP_lab4.cpp" />
+    <ClCompile Include="ProxyFareng.cpp" />
     <ClCompile Include="Sensor.cpp" />
+    <ClCompile Include="TempCelsius.cpp" />
     <ClCompile Include="TemperDetector.cpp" />
+    <ClCompile Include="TempFareng.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AirspdDetector.h" />
@@ -160,8 +163,11 @@
     <ClInclude Include="GasOzon.h" />
     <ClInclude Include="HumidDetector.h" />
     <ClInclude Include="Measurer.h" />
+    <ClInclude Include="ProxyFareng.h" />
     <ClInclude Include="Sensor.h" />
+    <ClInclude Include="TempCelsius.h" />
     <ClInclude Include="TemperDetector.h" />
+    <ClInclude Include="TempFareng.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

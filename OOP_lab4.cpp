@@ -11,6 +11,9 @@
 #include "Measurer.h"
 #include "TemperDetector.h"
 #include "HumidDetector.h"
+#include "TempCelsius.h"
+#include "TempFareng.h"
+#include "ProxyFareng.h"
 
 int main()
 {
@@ -27,8 +30,10 @@ int main()
 
     //GasDetector gs2(*oz);
     //gs2.viewMode();
-    TemperDetector *t1 = new TemperDetector();
-    HumidDetector* t2 = new HumidDetector();
+    TempCelsius *t1 = new TempCelsius();
+    TempFareng* t2 = new TempFareng();
+    ProxyFareng* t3 = new ProxyFareng(*t2);
     Sensor *sn1 = new Sensor();
     sn1->getMeasure(t2);
+    sn1->getMeasure(t3);
 }
