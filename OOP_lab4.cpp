@@ -6,14 +6,20 @@
 #include "Sensor.h"
 #include "GasMode.h"
 #include "GasDetector.h"
-#include "GasAmiak.h"
-#include "GasOzon.h"
 #include "Measurer.h"
 #include "TemperDetector.h"
 #include "HumidDetector.h"
 #include "TempCelsius.h"
 #include "TempFareng.h"
 #include "ProxyFareng.h"
+#include "KomboFood.h"
+#include "BirdFood.h"
+#include "CowFood.h"
+#include "Additions.h"
+#include "Vitamines.h"
+#include "Premixes.h"
+#include "Pomeshen.h"
+#include "CompPomeshen.h"
 
 int main()
 {
@@ -30,10 +36,33 @@ int main()
 
     //GasDetector gs2(*oz);
     //gs2.viewMode();
+    string s = "sss";
     TempCelsius *t1 = new TempCelsius();
-    TempFareng* t2 = new TempFareng();
-    ProxyFareng* t3 = new ProxyFareng(*t2);
-    Sensor *sn1 = new Sensor();
-    sn1->getMeasure(t2);
-    sn1->getMeasure(t3);
+    
+    //TempFareng* t2 = new TempFareng();
+    //ProxyFareng* t3 = new ProxyFareng(*t2);
+    Sensor *sn1 = new Sensor("sa0", "dcvxz");
+    Sensor* sn2 = new Sensor("sa1", "d12");
+    Sensor* sn3 = new Sensor("sa2", "dwq");
+   // cout << sn1->codename;
+    //sn1->getMeasure(t2);
+    //sn1->getMeasure(t3);
+    Pomeshen* longroom = new Pomeshen("long");
+    Pomeshen* sklad = new Pomeshen("sklad");
+    longroom->AddSensor(sn1);
+    longroom->AddSensor(sn2);
+    sklad ->AddSensor(sn3);
+    sklad->AddSensor(sn2);
+    //longroom->DisplaySensors();
+
+    CompPomeshen* complex1 = new CompPomeshen();
+    complex1->Add(sklad);
+    complex1->Add(longroom);
+    complex1->Display();
+
+    //BirdFood food;
+    //food->getDescription();
+   // Vitamines vitam(&food);
+
+    //Additions f ;
 }
