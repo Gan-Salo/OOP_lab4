@@ -20,6 +20,8 @@
 #include "Premixes.h"
 #include "Pomeshen.h"
 #include "CompPomeshen.h"
+#include "AnimalSensor.h"
+#include "SensAdapter.h"
 
 int main()
 {
@@ -47,7 +49,7 @@ int main()
    // cout << sn1->codename;
     //sn1->getMeasure(t2);
     //sn1->getMeasure(t3);
-    Pomeshen* longroom = new Pomeshen("long");
+    Pomeshen* longroom = new Pomeshen("long room");
     Pomeshen* sklad = new Pomeshen("sklad");
     longroom->AddSensor(sn1);
     longroom->AddSensor(sn2);
@@ -60,9 +62,19 @@ int main()
     complex1->Add(longroom);
     complex1->Display();
 
+
     //BirdFood food;
     //food->getDescription();
    // Vitamines vitam(&food);
-
+    AnimalSensor* t4 = new AnimalSensor();
     //Additions f ;
+    SensAdapter* adp = new SensAdapter(t4);
+    adp->getlocation();
+    adp->doMeasure();
+    KomboFood* k1 = new KomboFood();
+    BirdFood* f1 = new BirdFood();
+    cout << "\n" << f1->getDescriprion();
+    KomboFood k2;
+    //Premixes p1 = new Premixes(&k2);
+    
 }

@@ -1,5 +1,5 @@
 #include "CompPomeshen.h"
-
+#include "CustomIterator.h"
 
 void CompPomeshen::Add(Pomeshen* room)
 {

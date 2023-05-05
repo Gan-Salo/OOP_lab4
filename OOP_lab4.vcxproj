@@ -145,6 +145,7 @@
     <ClCompile Include="BirdFood.cpp" />
     <ClCompile Include="CompPomeshen.cpp" />
     <ClCompile Include="CowFood.cpp" />
+    <ClCompile Include="CustomIterator.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="GasAmiak.cpp" />
     <ClCompile Include="GasDetector.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="BirdFood.h" />
     <ClInclude Include="CompPomeshen.h" />
     <ClInclude Include="CowFood.h" />
+    <ClInclude Include="CustomIterator.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="GasAmiak.h" />
     <ClInclude Include="GasDetector.h" />

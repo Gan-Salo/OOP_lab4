@@ -4,6 +4,6 @@
 class Vitamines : public Additions 
 {
 	virtual std::string getDescriprion();
-	Vitamines(KomboFood* kFood) : Additions(kFood) {}
+	//Vitamines(KomboFood* kFood) : Additions(kFood) {}
 };
 

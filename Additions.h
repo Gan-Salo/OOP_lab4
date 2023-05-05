@@ -7,8 +7,8 @@ protected:
 	KomboFood* food;
 public:
 	virtual std::string getDescriprion() = 0;
-	Additions(KomboFood* kFood) { food = kFood; }
-	~Additions() {}
+	//Additions(KomboFood* kFood) { food = kFood; }
+	//~Additions() {}
 
 };
 

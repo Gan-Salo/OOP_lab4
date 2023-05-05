@@ -4,7 +4,10 @@
 class BirdFood : public KomboFood
 {
 public:
-	 std::string getDescriprion();
+	virtual std::string getDescriprion()
+	{
+		return std::string("This is food for Cows");
+	};
 	
 };
 
