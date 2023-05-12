@@ -1,6 +1,7 @@
 #include "BirdFood.h"
 
-//std::string BirdFood::getDescriprion()
-//{
-//	return std::string("This is food for Cows");
-//}
+std::string BirdFood::doSpread()
+{
+	return std::string("This is food for Birds");
+}
+

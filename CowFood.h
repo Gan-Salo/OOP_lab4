@@ -4,6 +4,6 @@
 class CowFood : public KomboFood
 {
 public:
-	virtual void getDescriprion();
+	virtual std::string doSpread();
 };
 

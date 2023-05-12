@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 
-std::string Premixes::getDescriprion() {
-    return std::string("Premixes with ") + food->getDescription();
+using namespace std;
+
+string Premixes::doSpread() {
+
+    return food->doSpread() + string(" with Premixes");
 }

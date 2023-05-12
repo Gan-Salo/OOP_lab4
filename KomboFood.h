@@ -5,7 +5,7 @@
 class KomboFood
 {	
 public:
-	virtual void getDescription() = 0;
-	
+	virtual std::string doSpread() = 0;
+	//virtual void doSpread() = 0;
 };
 

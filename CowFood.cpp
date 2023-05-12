@@ -1,6 +1,6 @@
 #include "CowFood.h"
 
-void CowFood::getDescriprion()
+std::string CowFood::doSpread()
 {
-	printf("This is food for Cows");
+	return std::string("This is food for Cows");
 }

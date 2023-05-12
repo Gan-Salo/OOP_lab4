@@ -71,10 +71,17 @@ int main()
     SensAdapter* adp = new SensAdapter(t4);
     adp->getlocation();
     adp->doMeasure();
-    KomboFood* k1 = new KomboFood();
-    BirdFood* f1 = new BirdFood();
-    cout << "\n" << f1->getDescriprion();
-    KomboFood k2;
-    //Premixes p1 = new Premixes(&k2);
+    
+    BirdFood bird;
+    CowFood cows;
+
+    cout << "\n" << bird.doSpread();
+    cout << "\n" << cows.doSpread();
+    
+    Premixes vit(&bird);
+    cout << "\n" << vit.doSpread();
+    //KomboFood k2;
+    //BirdFood* b1;
+   //Premixes* p1 = new Premixes(f1);
     
 }

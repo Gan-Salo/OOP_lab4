@@ -3,7 +3,8 @@
 
 class Premixes : public Additions 
 {
-	virtual std::string getDescriprion();
+public:
+	virtual std::string doSpread();
 	Premixes(KomboFood* kFood) : Additions(kFood) {}
 };
 

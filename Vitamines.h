@@ -3,7 +3,8 @@
 
 class Vitamines : public Additions 
 {
-	virtual std::string getDescriprion();
-	//Vitamines(KomboFood* kFood) : Additions(kFood) {}
+public:
+	virtual std::string doSpread();
+	Vitamines(KomboFood* kFood) : Additions(kFood) {}
 };
 
