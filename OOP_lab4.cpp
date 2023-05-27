@@ -83,5 +83,42 @@ int main()
     //KomboFood k2;
     //BirdFood* b1;
    //Premixes* p1 = new Premixes(f1);
+
+
+    //Тестирование итератора и комплекса
+    // Создание объектов Pomeshen
+    Pomeshen* room1 = new Pomeshen("\nRoom 1");
+    Pomeshen* room2 = new Pomeshen("Room 2");
+    Pomeshen* room3 = new Pomeshen("Room 3");
+    
+    room1->AddSensor(sn1);
+    room1->AddSensor(sn2);
+    room2->AddSensor(sn3);
+    room3->AddSensor(sn2);
+    // Создание объекта CompPomeshen
+    CompPomeshen* compRoom = new CompPomeshen();
+
+    // Добавление Pomeshen в CompPomeshen
+    compRoom->Add(room1);
+    compRoom->Add(room2);
+    compRoom->Add(room3);
+
+    // Вывод информации о помещениях и датчиках
+    compRoom->Display();
+
+    // Получение и использование итератора
+    CustomIterator iter = compRoom->GetIterator();
+    while (iter.HasNext()) {
+        Pomeshen* room = iter.Next();
+        // Дополнительные действия с помещением, если необходимо
+    }
+
+    // Освобождение памяти
+    delete room1;
+    delete room2;
+    delete room3;
+    delete compRoom;
+
+    return 0;
     
 }
