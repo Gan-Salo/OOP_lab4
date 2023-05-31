@@ -1,12 +1,17 @@
 #pragma once
 #include <iostream>
 #include "Measurer.h"
+#include <ctime> 
+#include <stdlib.h>
+#include <random>
 
+using namespace std;
 
 class HumidDetector : public Measurer {
 public:
-	void doMeasure() {
-		printf("Humid measure");
-	}
+	HumidDetector();
+	HumidDetector(MessageSender* sender);
+	int humidity;
+	void doMeasure();
 private:
 };

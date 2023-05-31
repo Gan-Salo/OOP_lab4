@@ -11,6 +11,5 @@ ProxyFareng::ProxyFareng(TempFareng& TempDet) :
 	
 
 void ProxyFareng::doMeasure() {
-	
-	cout << ((detTemp->temperature - 32) * 5 / 9) << " C*" << endl;
+	cout << "Температура: " << ((detTemp->temperature - 32) * 5 / 9) << " *C" << endl;
 }

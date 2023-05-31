@@ -1,12 +1,17 @@
 #pragma once
-
+#include <iostream>
+#include "MessageSender.h"
+using namespace std;
 
 class Measurer
 {
+protected: 
+    MessageSender* messageSender;
 public:
+    Measurer();
+    Measurer(MessageSender* sender);
 
-	//virtual void getName() = 0;
 	virtual void doMeasure() = 0;
-
+    void sendData();
 };
 

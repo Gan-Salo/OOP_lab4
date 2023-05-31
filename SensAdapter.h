@@ -1,19 +1,19 @@
 #pragma once
 #include <iostream>
-#include "Measurer.h"
+#include "TemperDetector.h"
 #include "AnimalSensor.h"
 
-class SensAdapter
+class SensAdapter : public TemperDetector
 {
 private:
 	AnimalSensor* animalSensor;
 public:
 	virtual void doMeasure() {
 		animalSensor->dotempMeasure();
-	}
-	virtual void getlocation() {
 		animalSensor->getlocation();
 	}
-	SensAdapter(AnimalSensor* anSens) { animalSensor = anSens; }
+
+	SensAdapter() { animalSensor = new AnimalSensor(); }
+	~SensAdapter() { delete animalSensor; }
 };
 

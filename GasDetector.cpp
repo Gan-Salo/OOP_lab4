@@ -2,31 +2,17 @@
 #include <iostream>
 #include <ctime> 
 #include <stdlib.h>
-#include <chrono>
-#include <random>
+
 
 using namespace std;
 
-GasDetector::GasDetector(GasMode& mode) :
-    chosedmode(&mode) {}
+GasDetector::GasDetector() {}
 
-void GasDetector::viewMode() {
-    chosedmode->chooseMode();
+GasDetector::GasDetector(MessageSender* sender) {
+	messageSender = sender;
 }
-
-void GasDetector::takeData() {
-    srand(static_cast <unsigned> (time(0)));
-    GasDetector::concentration = (float)(rand()) / ((float)(rand()) * 5);
-   // GasDetector::concentration = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-}
-
-float GasDetector::sendData() {
-    return GasDetector::concentration;
-}
-
-void GasDetector::concentInfo() {
-    if (concentration > 0.2)
-        cout << "\nВнимание! Превышена норма содержания газа!";
-    else  cout << "\nВсё в норме!";
-
+void GasDetector::doMeasure() {
+	srand(static_cast <unsigned> (time(0)));
+	gasconcentr = 0 + rand() % 80 - 12;
+	cout << "Концентрация газа: " << gasconcentr << " %" << endl;
 }

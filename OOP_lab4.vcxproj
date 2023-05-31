@@ -147,6 +147,7 @@
     <ClCompile Include="CowFood.cpp" />
     <ClCompile Include="CustomIterator.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Email.cpp" />
     <ClCompile Include="GasAmiak.cpp" />
     <ClCompile Include="GasDetector.cpp" />
     <ClCompile Include="GasMode.cpp" />
@@ -154,12 +155,15 @@
     <ClCompile Include="HumidDetector.cpp" />
     <ClCompile Include="KomboFood.cpp" />
     <ClCompile Include="Measurer.cpp" />
+    <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="OOP_lab4.cpp" />
     <ClCompile Include="Pomeshen.cpp" />
     <ClCompile Include="Premixes.cpp" />
     <ClCompile Include="ProxyFareng.cpp" />
+    <ClCompile Include="SenderFacade.cpp" />
     <ClCompile Include="SensAdapter.cpp" />
     <ClCompile Include="Sensor.cpp" />
+    <ClCompile Include="SMS.cpp" />
     <ClCompile Include="TempCelsius.cpp" />
     <ClCompile Include="TemperDetector.cpp" />
     <ClCompile Include="TempFareng.cpp" />
@@ -174,6 +178,7 @@
     <ClInclude Include="CowFood.h" />
     <ClInclude Include="CustomIterator.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Email.h" />
     <ClInclude Include="GasAmiak.h" />
     <ClInclude Include="GasDetector.h" />
     <ClInclude Include="GasMode.h" />
@@ -181,11 +186,14 @@
     <ClInclude Include="HumidDetector.h" />
     <ClInclude Include="KomboFood.h" />
     <ClInclude Include="Measurer.h" />
+    <ClInclude Include="MessageSender.h" />
     <ClInclude Include="Pomeshen.h" />
     <ClInclude Include="Premixes.h" />
     <ClInclude Include="ProxyFareng.h" />
+    <ClInclude Include="SenderFacade.h" />
     <ClInclude Include="SensAdapter.h" />
     <ClInclude Include="Sensor.h" />
+    <ClInclude Include="SMS.h" />
     <ClInclude Include="TempCelsius.h" />
     <ClInclude Include="TemperDetector.h" />
     <ClInclude Include="TempFareng.h" />

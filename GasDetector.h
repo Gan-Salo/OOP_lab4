@@ -1,21 +1,14 @@
 #pragma once
-
 #include <vector>
-#include "Sensor.h"
-#include "GasMode.h"
+#include "Measurer.h"
 
 using namespace std;
 
-class GasDetector: public Sensor {
-	
+class GasDetector : public Measurer {
 public:
-		GasDetector(GasMode& mode);
-		float sendData();
-		void takeData();
-		void viewMode();
-		void concentInfo();
+	GasDetector();
+	GasDetector(MessageSender* sender);
+	int gasconcentr;
+	void doMeasure();
 private:
-	GasMode* chosedmode;
-	//string mode;
-	float concentration;
 };

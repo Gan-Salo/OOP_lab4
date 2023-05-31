@@ -4,11 +4,10 @@
 
 class ProxyFareng : public TemperDetector {
 public:
+	float temperature;
 	TempFareng* detTemp;
 	ProxyFareng(TempFareng& TempDet);
-
 	void doMeasure() override;
-private:
-	float temperature;
+private:	
 };
 

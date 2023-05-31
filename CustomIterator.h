@@ -13,12 +13,25 @@ class CustomIterator {
 public:
     CustomIterator(Pomeshen** arr, int arrSize) : data(arr), size(arrSize), currentIndex(0) {}
 
-    bool HasNext() {
-        return currentIndex < size;
+    CustomIterator begin() {
+        return *this;
     }
 
-    Pomeshen* Next() {
-        return data[currentIndex++];
+    CustomIterator end() {
+        return CustomIterator(data, size); // Создаем итератор, указывающий на конец
+    }
+
+    bool operator!=(const CustomIterator& other) {
+        return currentIndex != other.currentIndex;
+    }
+
+    CustomIterator& operator++() {
+        ++currentIndex;
+        return *this;
+    }
+
+    Pomeshen* operator*() {
+        return data[currentIndex];
     }
 };
 //template <class node, class CompPomeshen>
