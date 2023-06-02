@@ -4,9 +4,9 @@
 
 class TemperDetector : public Measurer {
 public:
+	float temperature;
 	TemperDetector() {}
-	//TemperDetector(MessageSender* sender) : Measurer(sender) {}
-
-	virtual void doMeasure() = 0;
+	void addTemperDet();
+	void doMeasure();
 	virtual ~TemperDetector() {}
 };

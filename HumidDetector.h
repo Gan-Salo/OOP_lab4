@@ -13,5 +13,6 @@ public:
 	HumidDetector(MessageSender* sender);
 	int humidity;
 	void doMeasure();
+	void addHumidDet();
 private:
 };

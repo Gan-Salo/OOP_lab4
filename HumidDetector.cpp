@@ -10,3 +10,7 @@ void HumidDetector::doMeasure() {
 	humidity = 0 + rand() % 100;
 	cout << "Влажность воздуха: " << humidity << " %" << endl;
 }
+
+void HumidDetector::addHumidDet() {
+	std::cout << "Добавление датчика измерения влажности" << std::endl;
+}

@@ -12,6 +12,6 @@ public:
     Measurer(MessageSender* sender);
 
 	virtual void doMeasure() = 0;
-    void sendData();
+    virtual void sendData() = 0;
 };
 
