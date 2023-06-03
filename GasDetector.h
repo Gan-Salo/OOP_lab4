@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "Measurer.h"
 
 using namespace std;
@@ -7,10 +8,11 @@ using namespace std;
 class GasDetector : public Measurer {
 public:
 	GasDetector();
-	GasDetector(MessageSender* sender) : Measurer(sender) {}
+	GasDetector(MessageSender* sender);
 	int gasconcentr;
 	void doMeasure();
-	void sendData();
+	string doMeasurestr();
+	void measureAndSend();
 	void addGasDet();
 private:
 };

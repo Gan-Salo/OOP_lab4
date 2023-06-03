@@ -6,6 +6,6 @@ using namespace std;
 // Конкретный класс "E-mail"
 class Email : public MessageSender {
 public:
-    void sendData();
+    void sendData(const string& data);
 };
 

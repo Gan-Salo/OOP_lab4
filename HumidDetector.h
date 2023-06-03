@@ -14,5 +14,7 @@ public:
 	int humidity;
 	void doMeasure();
 	void addHumidDet();
+	string doMeasurestr();
+	void measureAndSend();
 private:
 };

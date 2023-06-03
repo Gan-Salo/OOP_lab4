@@ -1,6 +1,10 @@
 #pragma once
+#include <iostream>
+
+using namespace std;
+
 class MessageSender {
 public:
-    virtual void sendData() = 0;
+    virtual void sendData(const string& data) = 0;
+    //virtual ~MessageSender();
 };
-

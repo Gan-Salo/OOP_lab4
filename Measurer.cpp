@@ -8,7 +8,8 @@ Measurer::Measurer(MessageSender* sender) {
     messageSender = sender;
 }
 
-void Measurer::sendData() {
-    printf("Отправка данных: ");
-    messageSender->sendData();
+void Measurer::measureAndSend() {
+    //printf("Отправка данных: ");
+    string data = this->doMeasurestr();
+    messageSender->sendData(data);
 }

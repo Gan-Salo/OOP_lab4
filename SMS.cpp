@@ -1,5 +1,5 @@
 #include "SMS.h"
 
-void SMS::sendData() {
-    cout << "Отправка данных по SMS..." << endl;
+void SMS::sendData(const string& data) {
+    cout << "Отправка данных по SMS: '" << data << "'" << endl;
 }

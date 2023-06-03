@@ -6,6 +6,6 @@ using namespace std;
 
 class SMS : public MessageSender {
 public:
-    void sendData();
+    void sendData(const string& data);
 };
 
