@@ -5,6 +5,7 @@ using namespace std;
 
 class Sensor {
 public:
+	//Measurer* measurer;
 	string codename;
 	string type;
 	Sensor() = default;

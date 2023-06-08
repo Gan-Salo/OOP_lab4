@@ -2,17 +2,17 @@
 
 void CompPomeshen::Add(Pomeshen* room)
 {
-	rooms.push_back(room);
+	rooms.push(room);
 }
-void CompPomeshen::Remove(Pomeshen* room)
+void CompPomeshen::Removelast()
 {
-	rooms.remove(room);
+	rooms.pop();
 }
 
 void CompPomeshen::Display() {
-	for (std::list<Pomeshen*>::iterator iter = rooms.begin(); iter != rooms.end(); iter++)
+	for (CustomContainer<Pomeshen*>::custIter iter = rooms.begin(); iter != rooms.end(); ++iter)
 	{
-		cout << "Название помещения: " << (*iter)->name << ".\n";
-		(*iter)->DisplaySensors();
+		cout << "Название помещения: " << (*iter.next())->GetName() << ".\n";
+		(*iter.next())->DisplaySensors();
 	}
 }

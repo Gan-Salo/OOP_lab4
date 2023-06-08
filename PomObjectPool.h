@@ -1,5 +1,6 @@
 #pragma once
 #include "Pomeshen.h"
+using namespace std;
 
 class PomObjectPool {
 private:
@@ -9,7 +10,7 @@ private:
     PomObjectPool() {}
 
 public:
-    static PomObjectPool& GetInstance();
+    static PomObjectPool* GetInstance();
     Pomeshen* AcquireObject(string name, double area);      
     void ReleaseObject(Pomeshen* object);
 };

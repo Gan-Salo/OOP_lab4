@@ -9,6 +9,7 @@ class Pomeshen
 {
 protected:	
 	list<Sensor*> sensors;
+	string name;
 	double area;
 	int temperatureSensorCount;
 	int humiditySensorCount;
@@ -16,7 +17,7 @@ protected:
 	int ventilationCount;
 	int heatingCount;
 public:
-	string name;
+	
 	
 	Pomeshen() = default;
 	~Pomeshen();
@@ -26,7 +27,10 @@ public:
 	void AddSensor(Sensor* sensor);
 	void RemoveSensor(Sensor* sensor);
 	void DisplaySensors();
+	void SetArea(double newarea);
+	void SetName(string newname); 
 	double GetArea();
+	string GetName();
 	void SetSensorRequire(int temperatureCount, int humidityCount, int gasCount);
 	void SetVentilationRequire(int count);
 	void SetHeatingRequire(int count);

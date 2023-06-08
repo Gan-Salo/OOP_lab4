@@ -28,93 +28,93 @@
 #include "ImageData.h"
 #include "ImageDataFactory.h"
 #include "Terminal.h"
-
+//Iterator
+#include "CustomElement.h"
+#include "CustomIterator.h"
+#include "CustomContainer.h"
 //Lab9-10
 //abstract factory
-//#include "WaterFillingSystem.h"
-//#include "FeedingSystem.h"
+#include "ConcreteEquipFactory.h"
+#include "EquipmentFactory.h"
+
+#include "WaterFillingSystem.h"
+#include "FeedingSystem.h"
 //#include "RoomSystemFactory.h"
-//#include "RobotWaterFillingSystem.h"
-//#include "ConvWaterSystem.h"
-//#include "RobotFeedingSystem.h"
-//#include "ConvFeedingSystem.h"
+#include "RobotWaterFillingSystem.h"
+#include "ConvWaterSystem.h"
+#include "RobotFeedingSystem.h"
+#include "ConvFeedingSystem.h"
 //#include "ConcreteRoomSysFactory.h"
-////factory method
-//#include "Ration.h"
-//#include "RationFactory.h"
-//#include "CowRation.h"
-//#include "PigRation.h"
-//#include "PigRationFactory.h"
-//#include "CowRationFactory.h"
-////obj pool & singleton
-//#include "PomObjectPool.h"
-////Lab11 - builder
-//#include "ClimateSystemBuilder.h"
-//#include "ClimateSystemDirector.h"
-//#include "ConcreteClimateSysBuilder.h"
-//#include "VentilationSystem.h"
-//#include "HeatingSystem.h"
+//factory method
+#include "Ration.h"
+#include "RationFactory.h"
+#include "CowRation.h"
+#include "PigRation.h"
+#include "PigRationFactory.h"
+#include "CowRationFactory.h"
+//obj pool & singleton
+#include "PomObjectPool.h"
+//Lab11 - builder
+#include "ClimateSystemBuilder.h"
+#include "ClimateSystemDirector.h"
+#include "ConcreteClimateSysBuilder.h"
+#include "VentilationSystem.h"
+#include "HeatingSystem.h"
 using namespace std;
 
 
 int main() {
     setlocale(LC_ALL, "Russian");
+
+    cout << "\n---Демонстрация работы Prototype---" << endl;
+    //Создаем и инициализируем объект
+    Pomeshen* original = new Pomeshen("Кабинет", 80);
+
+    cout << "\n-Данные оригинального объекта-" << endl;
+ 
+    cout << "Название: " << original->GetName() << endl;
+    cout << "Площадь: " << original->GetArea() << endl;
     
-    GasDetector* gs = new GasDetector(new SMS);
-    gs->measureAndSend();
-    string str = gs->doMeasurestr();
+    //Клонируем объект 
+    cout << "\n-Данные клона до изменений-" << endl;   
+    Pomeshen* clone1 = original->Clone();
+    cout << "Название: " << clone1->GetName() << endl;
+    cout << "Площадь: " << clone1->GetArea() << endl;
+   
+    //Модифицируем клона
+    clone1->SetName("Новый кабинет");
+    clone1->SetArea(50);
 
-    HumidDetector* hd = new HumidDetector(new Email);
-    hd->measureAndSend();
+   //Проверяем изменения в клоне 
+    cout << "\n-Данные клона после изменений-" << endl;
+    cout << "Название: " << clone1->GetName() << endl;
+    cout << "Площадь: " << clone1->GetArea() << endl;
 
-    cout << str;
-    //cout << "\n---Демонстрация работы Prototype---" << endl;
-    ////Создаем и инициализируем объект
-    //Pomeshen original("Кабинет");
-    //original.SetSensorRequire(2, 1, 1);
-    //original.SetVentilationRequire(1);
-    //original.SetHeatingRequire(1);
-    //cout << "\n-Требования для клона до изменений-" << endl;
-    ////Клонируем объект 
-    //Pomeshen* clone1 = original.Clone();
-    //clone1->DisplaySensorRequire();
-    //clone1->DisplayVentilationRequire();
-    //clone1->DisplayHeatingRequire();
+    delete original, clone1;
 
-    ////Модифицируем клона
-    //clone1->SetSensorRequire(3, 2, 2);
-    //clone1->SetVentilationRequire(2);
-    //clone1->SetHeatingRequire(2);
-    //cout << "\n-Требования к оригиналу-" << endl;
-    //// Проверяем изменения в клонах и оригинале
-    //original.DisplaySensorRequire();
-    //original.DisplayVentilationRequire();
-    //original.DisplayHeatingRequire();
+    //Демонстрация работы object pool 
+    cout << "\n---Демонстрация работы Object pool---" << endl;
+    PomObjectPool* pool1 = PomObjectPool::GetInstance();
 
-    //cout << "\n-Требования для клона после изменений-" << endl;
-    //clone1->DisplaySensorRequire();
-    //clone1->DisplayVentilationRequire();
-    //clone1->DisplayHeatingRequire();
-
-    //// Освобождаем память
-    //delete clone1;
-
-    ////Демонстрация работы object pool 
-    //cout << "\n---Демонстрация работы Object pool---" << endl;
-    //PomObjectPool& pool = PomObjectPool::GetInstance();
-
-    //// Получение объекта из пула
-    //Pomeshen* obj1 = pool.AcquireObject("Помещение 1", 100.0);
+    // Получение объекта из пула
+    Pomeshen* obj1 = pool1->AcquireObject("Кабинет", 80);
     //obj1->SetSensorRequire(3, 2, 1);
+    pool1->ReleaseObject(obj1);
+    Pomeshen* obj2 = pool1->AcquireObject("Кабинет", 80);  
+    pool1->ReleaseObject(obj2);
+    Pomeshen* obj3 = pool1->AcquireObject("Амбар", 260);   
+    pool1->ReleaseObject(obj3);
+    
+    //Pomeshen* obj2 = pool1->AcquireObject("Кабинетj", 70);
     //obj1->DisplaySensorRequire();
-    //obj1->ResetObject();
+    
     //pool.ReleaseObject(obj1); // Возвращение объекта в пул
     //
     //// Получение того же объекта из пула
     //Pomeshen* obj2 = pool.AcquireObject("Помещение 1", 100.0);
     //obj2->DisplaySensorRequire(); 
     //pool.ReleaseObject(obj2); // Возвращение объекта в пул
-
+    //
     //// Получение нового объекта из пула
     //Pomeshen* obj3 = pool.AcquireObject("Помещение 2", 200.0);
     //obj3->SetSensorRequire(2, 1, 0);
@@ -126,44 +126,44 @@ int main() {
     //obj3->ResetObject();
     //obj3->DisplaySensorRequire(); // Состояние объекта сброшено в начальное
 
-    //
+    
 
-    ////Демонстрация работы Abstract factory 
-    //cout << "\n---Демонстрация работы Abstract factory---" << endl;
-    //RoomSystemFactory* factory = new ConcreteRoomSysFactory();
-    //WaterFillingSystem* waterFillingSystem = factory->createWaterFillingSystem();
-    //FeedingSystem* feedingSystem = factory->createFeedingSystem();
+    //Демонстрация работы Abstract factory 
+    cout << "\n---Демонстрация работы Abstract factory---" << endl;
+    RoomSystemFactory* factory = new ConcreteEquipFactory();
+    WaterFillingSystem* waterFillingSystem = factory->createWaterFillingSystem();
+    FeedingSystem* feedingSystem = factory->createFeedingSystem();
 
-    //// Использование компонентов помещения
-    //waterFillingSystem->fillWater();
-    //feedingSystem->spreadFood();
+    // Использование компонентов помещения
+    waterFillingSystem->fillWater();
+    feedingSystem->spreadFood();
 
-    //delete waterFillingSystem;
-    //delete feedingSystem;
-    //delete factory;
+    delete waterFillingSystem;
+    delete feedingSystem;
+    delete factory;
 
-    ////Демонстрация работы factory method
-    //RationFactory* factory1;
-    //Ration* ration;
-    //cout << "\n---Демонстрация работы factory method---" << endl;
-    //factory1 = new CowRationFactory();
-    //ration = factory1->createRation(80);
-    //ration->createRation();
-    //delete ration;
-    //delete factory1;
+    //Демонстрация работы factory method
+    RationFactory* factory1;
+    Ration* ration;
+    cout << "\n---Демонстрация работы factory method---" << endl;
+    factory1 = new CowRationFactory();
+    ration = factory1->createRation(80);
+    ration->createRation();
+    delete ration;
+    delete factory1;
 
-    //factory1 = new PigRationFactory();
-    //ration = factory1->createRation(60);
-    //ration->createRation();
-    //delete ration;
-    //delete factory1;
+    factory1 = new PigRationFactory();
+    ration = factory1->createRation(60);
+    ration->createRation();
+    delete ration;
+    delete factory1;
 
-    ////Демонстрация работы строителя
-    //cout << "\n---Демонстрация работы builder---" << endl;
-    //ClimateSystemBuilder* builder = new ConcreteClimateSysBuilder();
-    //ClimateSystemDirector director(builder);
-    //director.construct();
-    //delete builder;
+    //Демонстрация работы строителя
+    cout << "\n---Демонстрация работы builder---" << endl;
+    ClimateSystemBuilder* builder = new ConcreteClimateSysBuilder();
+    ClimateSystemDirector director(builder);
+    director.construct();
+    delete builder;
 
     return 0;
 }

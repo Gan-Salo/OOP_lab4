@@ -6,19 +6,18 @@
 #include "SMS.h"
 #include "Email.h"
 
-//// Фасадный класс
-//class SenderFacade {
-//private:
-//    MessageSender* smsSender;
-//    MessageSender* emailSender;
-//    Measurer* humiditySensor;
-//    Measurer* gasdetector;
-//
-//public:
-//    SenderFacade();
-//    ~SenderFacade();
-//    void collectTemperatureData();
-//    void collectHumidityData();
-//    void sendTemperatureData();
-//    void sendHumidityData();
-//};
+// Фасадный класс
+class SenderFacade {
+private:
+    MessageSender* smsSender;
+    MessageSender* emailSender;
+    Measurer* humiditySensor;
+    Measurer* gasdetector;
+
+public:
+    SenderFacade();
+    ~SenderFacade();
+    void collectandSendTemper();
+    void collectandSendHumidData();
+
+};

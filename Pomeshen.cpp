@@ -35,8 +35,20 @@ void Pomeshen::DisplaySensors() {
 	cout << std::endl;
 }
 
+string Pomeshen::GetName() {
+    return name;
+}
+
 double Pomeshen::GetArea() {
     return area;
+}
+
+void Pomeshen::SetArea(double newarea) {
+    area = newarea;
+}
+
+void Pomeshen::SetName(string newname) {
+    name = newname;
 }
 
 void Pomeshen::SetSensorRequire(int temperatureCount, int humidityCount, int gasCount) {

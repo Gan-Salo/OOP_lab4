@@ -1,15 +1,17 @@
 #pragma once
 #include "Pomeshen.h"
 #include "CustomIterator.h"
+#include "CustomElement.h"
+#include "CustomContainer.h"
 #include <iostream>
 #include <list>
 
 class CompPomeshen : public Pomeshen {
 protected:
-    std::list<Pomeshen*> rooms;
+    CustomContainer<Pomeshen*> rooms;
 public:
     void Add(Pomeshen* room);
-    void Remove(Pomeshen* room);
+    void Removelast();
     void Display();
 };
 
