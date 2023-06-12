@@ -4,6 +4,8 @@
 #include <conio.h>
 #include <string>
 #include <map>
+#include <stack>
+#include <string>
 #include <vector>
 #include "Sensor.h"
 #include "Measurer.h"
@@ -36,15 +38,12 @@
 //abstract factory
 #include "ConcreteEquipFactory.h"
 #include "EquipmentFactory.h"
-
 #include "WaterFillingSystem.h"
 #include "FeedingSystem.h"
-//#include "RoomSystemFactory.h"
 #include "RobotWaterFillingSystem.h"
 #include "ConvWaterSystem.h"
 #include "RobotFeedingSystem.h"
 #include "ConvFeedingSystem.h"
-//#include "ConcreteRoomSysFactory.h"
 //factory method
 #include "Ration.h"
 #include "RationFactory.h"
@@ -60,113 +59,125 @@
 #include "ConcreteClimateSysBuilder.h"
 #include "VentilationSystem.h"
 #include "HeatingSystem.h"
+//Lab13 - state
+#include "State.h"
+#include "Memento.h"
+#include "CareTaker.h"
+#include "OnState.h"
+#include "OffState.h"
+#include "CoolingState.h"
+#include "CirculationState.h"
 using namespace std;
 
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-
-    cout << "\n---Демонстрация работы Prototype---" << endl;
-    //Создаем и инициализируем объект
-    Pomeshen* original = new Pomeshen("Кабинет", 80);
-
-    cout << "\n-Данные оригинального объекта-" << endl;
- 
-    cout << "Название: " << original->GetName() << endl;
-    cout << "Площадь: " << original->GetArea() << endl;
+    setlocale(LC_ALL, "Russian"); 
     
-    //Клонируем объект 
-    cout << "\n-Данные клона до изменений-" << endl;   
-    Pomeshen* clone1 = original->Clone();
-    cout << "Название: " << clone1->GetName() << endl;
-    cout << "Площадь: " << clone1->GetArea() << endl;
-   
-    //Модифицируем клона
-    clone1->SetName("Новый кабинет");
-    clone1->SetArea(50);
-
-   //Проверяем изменения в клоне 
-    cout << "\n-Данные клона после изменений-" << endl;
-    cout << "Название: " << clone1->GetName() << endl;
-    cout << "Площадь: " << clone1->GetArea() << endl;
-
-    delete original, clone1;
-
-    //Демонстрация работы object pool 
-    cout << "\n---Демонстрация работы Object pool---" << endl;
-    PomObjectPool* pool1 = PomObjectPool::GetInstance();
-
-    // Получение объекта из пула
-    Pomeshen* obj1 = pool1->AcquireObject("Кабинет", 80);
-    //obj1->SetSensorRequire(3, 2, 1);
-    pool1->ReleaseObject(obj1);
-    Pomeshen* obj2 = pool1->AcquireObject("Кабинет", 80);  
-    pool1->ReleaseObject(obj2);
-    Pomeshen* obj3 = pool1->AcquireObject("Амбар", 260);   
-    pool1->ReleaseObject(obj3);
+    cout << "\n---Демонстрация работы State и Memento---" << endl;
     
-    //Pomeshen* obj2 = pool1->AcquireObject("Кабинетj", 70);
-    //obj1->DisplaySensorRequire();
-    
-    //pool.ReleaseObject(obj1); // Возвращение объекта в пул
-    //
-    //// Получение того же объекта из пула
-    //Pomeshen* obj2 = pool.AcquireObject("Помещение 1", 100.0);
-    //obj2->DisplaySensorRequire(); 
-    //pool.ReleaseObject(obj2); // Возвращение объекта в пул
-    //
-    //// Получение нового объекта из пула
-    //Pomeshen* obj3 = pool.AcquireObject("Помещение 2", 200.0);
-    //obj3->SetSensorRequire(2, 1, 0);
-    //obj3->DisplaySensorRequire();
+    //Создание объектов состояний
+    State* onState = new OnState();
+    State* offState = new OffState();
+    State* coolingState = new CoolingState();
+    State* circulationState = new CirculationState();
 
-    //pool.ReleaseObject(obj3); // Возвращение объекта в пул
+    //Создание системы вентиляции
+    VentilationSystem ventilationSystem(onState, offState, coolingState, circulationState);
 
-    //// Сброс состояния объекта перед повторным использованием
-    //obj3->ResetObject();
-    //obj3->DisplaySensorRequire(); // Состояние объекта сброшено в начальное
+    //Демонстрация переключения состояний
+    ventilationSystem.makeOn();  //Включаем систему вентиляции
+    ventilationSystem.makeCooling();  //Устанавливаем режим охлаждения
+    ventilationSystem.makeOff();  //Выключаем систему вентиляции
+    ventilationSystem.makeOn();  // Включаем систему вентиляции
+    ventilationSystem.makeCirculate();  //Устанавливаем режим циркуляции
 
-    
-
-    //Демонстрация работы Abstract factory 
-    cout << "\n---Демонстрация работы Abstract factory---" << endl;
-    RoomSystemFactory* factory = new ConcreteEquipFactory();
-    WaterFillingSystem* waterFillingSystem = factory->createWaterFillingSystem();
-    FeedingSystem* feedingSystem = factory->createFeedingSystem();
-
-    // Использование компонентов помещения
-    waterFillingSystem->fillWater();
-    feedingSystem->spreadFood();
-
-    delete waterFillingSystem;
-    delete feedingSystem;
-    delete factory;
-
-    //Демонстрация работы factory method
-    RationFactory* factory1;
-    Ration* ration;
-    cout << "\n---Демонстрация работы factory method---" << endl;
-    factory1 = new CowRationFactory();
-    ration = factory1->createRation(80);
-    ration->createRation();
-    delete ration;
-    delete factory1;
-
-    factory1 = new PigRationFactory();
-    ration = factory1->createRation(60);
-    ration->createRation();
-    delete ration;
-    delete factory1;
-
-    //Демонстрация работы строителя
-    cout << "\n---Демонстрация работы builder---" << endl;
-    ClimateSystemBuilder* builder = new ConcreteClimateSysBuilder();
-    ClimateSystemDirector director(builder);
-    director.construct();
-    delete builder;
+    ventilationSystem.restoreState();  // Восстанавливаем предыдущее состояние
+    ventilationSystem.getState();
+    // Освобождение памяти
+    delete onState;
+    delete offState;
+    delete coolingState;
+    delete circulationState;
 
     return 0;
 }
+
+//
+//int main() {
+//    setlocale(LC_ALL, "Russian");
+//    
+//    //Демонстрация работы Prototype 
+//    cout << "\n---Демонстрация работы Prototype---" << endl;
+//    //Создаем и инициализируем объект
+//    Pomeshen* original = new Pomeshen("Кабинет", 80);
+//    cout << "\n-Данные оригинального объекта-" << endl;
+//    cout << "Название: " << original->GetName() << endl;
+//    cout << "Площадь: " << original->GetArea() << endl;
+//    //Клонируем объект 
+//    cout << "\n-Данные клона до изменений-" << endl;   
+//    Pomeshen* clone1 = original->Clone();
+//    cout << "Название: " << clone1->GetName() << endl;
+//    cout << "Площадь: " << clone1->GetArea() << endl;  
+//    //Модифицируем клона
+//    clone1->SetName("Новый кабинет");
+//    clone1->SetArea(50);
+//   //Проверяем изменения в клоне 
+//    cout << "\n-Данные клона после изменений-" << endl;
+//    cout << "Название: " << clone1->GetName() << endl;
+//    cout << "Площадь: " << clone1->GetArea() << endl;
+//    delete original, clone1;
+//
+//    //Демонстрация работы object pool 
+//    cout << "\n---Демонстрация работы Object pool---" << endl;
+//    PomObjectPool* pool1 = PomObjectPool::GetInstance();
+//
+//    // Получение объектов из пула
+//    Pomeshen* obj1 = pool1->AcquireObject("Кабинет", 80);
+//    pool1->ReleaseObject(obj1);
+//    Pomeshen* obj2 = pool1->AcquireObject("Кабинет", 80);  
+//    pool1->ReleaseObject(obj2);
+//    Pomeshen* obj3 = pool1->AcquireObject("Амбар", 260);   
+//    pool1->ReleaseObject(obj3);
+//    
+//    //Демонстрация работы Abstract factory 
+//    cout << "\n---Демонстрация работы Abstract factory---" << endl;
+//    EquipmentFactory* factory = new ConcreteEquipFactory();
+//    WaterFillingSystem* waterFillingSystem = factory->createWaterFillingSystem();
+//    FeedingSystem* feedingSystem = factory->createFeedingSystem();
+//
+//    //Использование компонентов оборудования
+//    waterFillingSystem->fillWater();
+//    feedingSystem->spreadFood();
+//
+//    delete waterFillingSystem;
+//    delete feedingSystem;
+//    delete factory;
+//
+//    //Демонстрация работы factory method
+//    RationFactory* factory1;
+//    Ration* ration;
+//    cout << "\n---Демонстрация работы factory method---" << endl;
+//    factory1 = new CowRationFactory();
+//    ration = factory1->createRation(80);
+//    ration->createRation();
+//    delete ration;
+//    delete factory1;
+//
+//    factory1 = new PigRationFactory();
+//    ration = factory1->createRation(60);
+//    ration->createRation();
+//    delete ration;
+//    delete factory1;
+//
+//    //Демонстрация работы строителя
+//    cout << "\n---Демонстрация работы builder---" << endl;
+//    ClimateSystemBuilder* builder = new ConcreteClimateSysBuilder();
+//    ClimateSystemDirector director(builder);
+//    director.construct();
+//    delete builder;
+//
+//    return 0;
+//}
 
 
 

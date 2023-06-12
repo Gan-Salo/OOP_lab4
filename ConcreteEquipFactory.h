@@ -1,5 +1,5 @@
 #pragma once
-#include "RoomSystemFactory.h"
+#include "EquipmentFactory.h"
 #include "RobotWaterFillingSystem.h"
 #include "ConvWaterSystem.h"
 #include "RobotFeedingSystem.h"
@@ -8,7 +8,7 @@
 
 using namespace std;
 //Конкретная фабрика для создания помещения с разными вариантами систем 
-class ConcreteEquipFactory : public RoomSystemFactory {
+class ConcreteEquipFactory : public EquipmentFactory {
 public:
     WaterFillingSystem* createWaterFillingSystem() {
         return new ConvWaterSystem();

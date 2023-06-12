@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class HeatingSystem{
+class HeatingSystem {
 public:
     void addHeatingSystem();
 };

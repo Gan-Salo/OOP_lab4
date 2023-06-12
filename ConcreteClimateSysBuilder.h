@@ -4,24 +4,11 @@
 //  онкретный строитель дл€ системы микроклимата
 class ConcreteClimateSysBuilder : public ClimateSystemBuilder {
 public:
-    void addTemperDet() {
-        temperatureSensor.addTemperDet();
-    }
-
-    void addHumidDet() {
-        humiditySensor.addHumidDet();
-    }
-
-    void addGasDet() {
-        gasSensor.addGasDet();
-    }
-
-    void addVentilSystem() {
-        ventilationSystem.addVentilSystem();
-    }
-
-    void addHeatingSystem() {
-        heatingSystem.addHeatingSystem();
-    }
+    ~ConcreteClimateSysBuilder();
+    void addTemperDet();
+    void addHumidDet();
+    void addGasDet();
+    void addVentilSystem();
+    void addHeatingSystem();
 };
 

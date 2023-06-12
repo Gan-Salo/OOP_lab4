@@ -1,7 +1,7 @@
 #pragma once
 
 //Абстрактный класс компонента помещения
-class FeedingSystem{
+class FeedingSystem {
 public:
     virtual void spreadFood() = 0;
 };
