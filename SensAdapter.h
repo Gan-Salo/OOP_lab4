@@ -2,6 +2,7 @@
 #include <iostream>
 #include "TemperDetector.h"
 #include "AnimalSensor.h"
+#include "CowSensor.h"
 
 class SensAdapter : public TemperDetector
 {
@@ -13,7 +14,7 @@ public:
 		animalSensor->getlocation();
 	}
 
-	SensAdapter() { animalSensor = new AnimalSensor(); }
+	SensAdapter() { animalSensor = new CowSensor(); }
 	~SensAdapter() { delete animalSensor; }
 };
 

@@ -52,28 +52,27 @@ public:
 
     void makeOn() {
         currentState->on();
-        saveState();
+        
     }
 
     void makeOff() {
         currentState->off();
-        saveState();
+       
     }
 
     void makeCooling() {
         currentState->cooling();
-        saveState();
+        
     }
 
     void makeCirculate() {
         currentState->circulation();
-        saveState();
+     
     }
 
     void saveState() {
         Memento* memento = new Memento(currentState);
         careTaker.pushMemento(memento);
-
     }
 
     void restoreState() {

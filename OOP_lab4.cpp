@@ -36,14 +36,14 @@
 #include "CustomContainer.h"
 //Lab9-10
 //abstract factory
-#include "ConcreteEquipFactory.h"
-#include "EquipmentFactory.h"
-#include "WaterFillingSystem.h"
-#include "FeedingSystem.h"
-#include "RobotWaterFillingSystem.h"
-#include "ConvWaterSystem.h"
-#include "RobotFeedingSystem.h"
-#include "ConvFeedingSystem.h"
+//#include "ConcreteEquipFactory.h"
+//#include "EquipmentFactory.h"
+//#include "WaterFillingSystem.h"
+//#include "FeedingSystem.h"
+//#include "RobotWaterFillingSystem.h"
+//#include "ConvWaterSystem.h"
+//#include "RobotFeedingSystem.h"
+//#include "ConvFeedingSystem.h"
 //factory method
 #include "Ration.h"
 #include "RationFactory.h"
@@ -60,6 +60,7 @@
 #include "VentilationSystem.h"
 #include "HeatingSystem.h"
 //Lab13 - state
+//#include "VentilationSystem.h"
 #include "State.h"
 #include "Memento.h"
 #include "CareTaker.h"
@@ -67,8 +68,30 @@
 #include "OffState.h"
 #include "CoolingState.h"
 #include "CirculationState.h"
-using namespace std;
+//observer
+#include "Observer.h"
+#include "GasObserver.h"
 
+//Lab15 - indirection
+#include "AnimalSensor.h"
+#include "CowSensor.h"
+#include "ChickenSensor.h"
+#include "AnimalDataManager.h"
+//command
+#include "Command.h"
+#include "FeedingSystem.h"
+#include "FeedCowCommand.h"
+#include "FeedPigCommand.h"
+#include "RobotFeedingSystem.h"
+#include "Invoker.h"
+//visitor
+#include "QualityVisitor.h"
+#include "Product.h"
+#include "MilkProduct.h"
+#include "EggsProduct.h"
+#include "EggsQualityVisitor.h"
+#include "MilkQualityVisitor.h"
+using namespace std;
 
 int main() {
     setlocale(LC_ALL, "Russian"); 
@@ -87,18 +110,86 @@ int main() {
     //Демонстрация переключения состояний
     ventilationSystem.makeOn();  //Включаем систему вентиляции
     ventilationSystem.makeCooling();  //Устанавливаем режим охлаждения
+    ventilationSystem.saveState(); //Сохраняем текущее состояние
     ventilationSystem.makeOff();  //Выключаем систему вентиляции
-    ventilationSystem.makeOn();  // Включаем систему вентиляции
+    ventilationSystem.makeOn();  //Включаем систему вентиляции
     ventilationSystem.makeCirculate();  //Устанавливаем режим циркуляции
+    ventilationSystem.restoreState();  // Восстанавливаем сохраненное состояние
+    ventilationSystem.getState();   
+    
+    //Освобождение памяти
+    delete onState, offState, coolingState, circulationState;
 
-    ventilationSystem.restoreState();  // Восстанавливаем предыдущее состояние
-    ventilationSystem.getState();
-    // Освобождение памяти
-    delete onState;
-    delete offState;
-    delete coolingState;
-    delete circulationState;
+    cout << "\n---Демонстрация работы Observer---" << endl;
+    GasDetector* gassensor = new GasDetector(); 
+    GasObserver observer1;
+    gassensor->addObserver(&observer1); //Добавляем наблюдателя за датчиком
 
+    //Проводим измерение температуры и оповещение наблюдателей
+    gassensor->doMeasure();
+
+    gassensor->removeObserver(&observer1);  //Удаляем наблюдателя
+    delete gassensor;
+
+    cout << "\n---Демонстрация работы Indirection---" << endl;
+    AnimalDataManager animalDataManager;
+
+    // Создаем и добавляем сенсорные устройства для разных типов животных
+    AnimalSensor* cowSensor = new CowSensor();
+    AnimalSensor* chickenSensor = new ChickenSensor();
+
+    animalDataManager.addSensor(cowSensor);
+    animalDataManager.addSensor(chickenSensor);
+
+    // Собираем данные от всех сенсорных устройств
+    animalDataManager.collectDataFromAllSensors();
+
+    // Освобождаем память
+    delete cowSensor;
+    delete chickenSensor;
+
+    cout << "\n---Демонстрация работы Command---" << endl;
+    //Создаем объекты команд и получателя команд
+    FeedingSystem* robotFeedingSystem = new RobotFeedingSystem();
+    Command* feedCowCommand = new FeedCowCommand(robotFeedingSystem);
+    Command* feedPigCommand = new FeedPigCommand(robotFeedingSystem);
+
+    //Создаем инициатор
+    Invoker invoker;
+
+    //Добавляем команды в очередь
+    invoker.addCommand(feedCowCommand);
+    invoker.addCommand(feedPigCommand);
+
+    //Выполняем все команды
+    invoker.executeCommands();
+
+    //Освобождаем память
+    delete feedCowCommand;
+    delete feedPigCommand;
+    delete robotFeedingSystem;
+
+    cout << "\n---Демонстрация работы Visitor---" << endl;
+    //Добавление продуктов
+    list<Product*> products;
+    products.push_back(new MilkProduct());
+    products.push_back(new EggsProduct());
+    
+    //Добавление посетителей
+    QualityVisitor* eggsvisitor = new EggsQualityVisitor();
+    QualityVisitor* milkvisitor = new MilkQualityVisitor();
+
+    for (Product* product : products) {
+        product->accept(eggsvisitor);
+        product->accept(milkvisitor);
+    }
+
+    //Освобождаем память
+    for (Product* product : products) {
+        delete product;
+    }
+    delete eggsvisitor;
+    delete milkvisitor;
     return 0;
 }
 
